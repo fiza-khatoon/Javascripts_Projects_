@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>2D Brick Breaker Game</title>
+</head>
+<body>
+    <div id="startScreen">
+        <label for="playerName">Enter your name</label>
+        <input type="text" id="playerName" placeholder="Your Name">
+        <button id="startButton">Start Game</button>
+    </div>
+    
+    <div id="gameScreen" style="display: none;">
+        <canvas id="canvas"></canvas>
+        <canvas id="canvas1"></canvas>
+        <div style="display:inline">
+            <h2 style="text-align:center" id="curr_score">YOUR SCORE:</h2>
+            <h2 style="text-align:center" id="high_score">HIGH SCORE:</h2>
+           
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        let playerName = ""; // Variable to store the player's name
+
+        function getPlayerName() {
+            playerName = document.getElementById("playerName").value;
+            if (playerName.trim() === "") {
+                playerName = "Anonymous"; // Set a default name if none provided
+            }
+        }
+
+        function startGame() {
+            getPlayerName();
+            document.getElementById("startScreen").style.display = "none";
+            document.getElementById("gameScreen").style.display = "block";
+            Text.draw(`Hello, ${playerName}! Click to play!`);
+            canvas.removeEventListener('click', startGame);
+            canvas.addEventListener('click', x);
+        }
+
+        document.getElementById("startButton").addEventListener("click", startGame);
+    </script>
+</body>
+</html>
